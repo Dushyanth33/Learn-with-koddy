@@ -42,8 +42,8 @@ export async function chatWithKoddy(history: {role: 'user' | 'model', parts: {te
     return "🚨 Setup Error: VITE_GEMINI_API_KEY is completely missing from your deployed build! Please go to Vercel Settings -> Environment Variables, add VITE_GEMINI_API_KEY, and click REDEPLOY.";
   }
 
-  // Robust fallback chain for varying Google API regions and key tiers
-  const modelsToTry = ["gemini-1.5-flash", "gemini-1.5-flash-latest", "gemini-pro"];
+  // Updated fallback chain for modern 2026 Google API regions and key tiers
+  const modelsToTry = ["gemini-2.0-flash", "gemini-2.5-flash", "gemini-flash-latest"];
   let lastError: any = null;
 
   for (const modelName of modelsToTry) {
