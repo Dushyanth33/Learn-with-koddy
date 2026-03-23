@@ -3,9 +3,10 @@ import { ArrowRight, Sparkles } from 'lucide-react';
 
 interface HeroProps {
   setCurrentView: (view: string) => void;
+  isLoggedIn: boolean;
 }
 
-const Hero: React.FC<HeroProps> = ({ setCurrentView }) => {
+const Hero: React.FC<HeroProps> = ({ setCurrentView, isLoggedIn }) => {
   return (
     <div className="relative overflow-hidden bg-black pt-24 pb-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -29,18 +30,20 @@ const Hero: React.FC<HeroProps> = ({ setCurrentView }) => {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <button 
-              onClick={() => setCurrentView('SignUp')}
+              onClick={() => setCurrentView(isLoggedIn ? 'Courses' : 'SignUp')}
               className="w-full sm:w-auto px-8 py-4 bg-primary-600 hover:bg-primary-500 text-white rounded-xl font-semibold text-lg flex items-center justify-center gap-2 transition-all duration-300 transform hover:scale-105"
             >
-              Get Started for Free
+              {isLoggedIn ? 'Go to Courses' : 'Get Started for Free'}
               <ArrowRight className="w-5 h-5" />
             </button>
-            <button 
-              onClick={() => setCurrentView('Courses')}
-              className="w-full sm:w-auto px-8 py-4 bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-white rounded-xl font-semibold text-lg transition-all duration-300"
-            >
-              Explore Courses
-            </button>
+            {!isLoggedIn && (
+              <button 
+                onClick={() => setCurrentView('Courses')}
+                className="w-full sm:w-auto px-8 py-4 bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-white rounded-xl font-semibold text-lg transition-all duration-300"
+              >
+                Explore Courses
+              </button>
+            )}
           </div>
         </div>
       </div>

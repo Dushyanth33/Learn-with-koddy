@@ -77,7 +77,7 @@ function App() {
       <main>
         {currentView === 'Home' && (
           <div className="animate-in fade-in duration-500">
-            <Hero setCurrentView={setCurrentView} />
+            <Hero setCurrentView={setCurrentView} isLoggedIn={!!user} />
             <Features />
           </div>
         )}
