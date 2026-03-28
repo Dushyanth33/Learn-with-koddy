@@ -5,12 +5,12 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  // Support both Vercel native env var and the VITE_ one.
-  const rawKey = process.env.VITE_GEMINI_API_KEY || process.env.GEMINI_API_KEY || "";
+  // Only use the secure server-side environment variable.
+  const rawKey = process.env.GEMINI_API_KEY || "";
   const apiKey = rawKey.replace(/^["'`]+|["'`]+$/g, '').trim();
 
   if (!apiKey) {
-    return res.status(500).json({ error: '🚨 API Key is missing in Vercel Environment Variables. Please add VITE_GEMINI_API_KEY.' });
+    return res.status(500).json({ error: '🚨 API Key is missing in Vercel Environment Variables. Please add GEMINI_API_KEY.' });
   }
 
   try {
